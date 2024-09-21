@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UESAN.StoreDB.DOMAIN.Core.Entities;
+using UESAN.StoreDB.DOMAIN.Core.Interfaces;
 using UESAN.StoreDB.DOMAIN.Infrastructure.Data;
 
 namespace UESAN.StoreDB.DOMAIN.Infrastructure.Repositories
 {
-    public class CategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly StoreDbContext _dbContext;
 
@@ -76,7 +77,7 @@ namespace UESAN.StoreDB.DOMAIN.Infrastructure.Repositories
             return (rows > 0);
 
             //_dbContext.Category.Remove(category);
-        
+
         }
 
 
