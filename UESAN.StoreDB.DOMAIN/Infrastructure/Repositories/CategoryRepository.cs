@@ -17,22 +17,11 @@ namespace UESAN.StoreDB.DOMAIN.Infrastructure.Repositories
         public CategoryRepository(StoreDbContext dbContext)
         {
             _dbContext = dbContext;
-        }
-
-        public string obtenerApellido()
-        {
-            return "";
-        }
-        ///Método Sincrono
-        //public IEnumerable<Category> GetCategories()
-        //{
-        //    var categories = _dbContext.Category.ToList();
-        //    return categories;
-        //}
+        }       
 
         public async Task<IEnumerable<Category>> GetCategories()
         {
-            var categories = await _dbContext.Category.ToListAsync();
+            var categories = await _dbContext.Category.Where(c=>c.IsActive==true).ToListAsync();
             return categories;
         }
 
@@ -46,9 +35,20 @@ namespace UESAN.StoreDB.DOMAIN.Infrastructure.Repositories
             return category;
         }
 
+        public async Task<Category> GetCategoryWithProducts(int id)
+        {
+            var category = await _dbContext
+                        .Category
+                        .Where(c => c.Id == id && c.IsActive == true)
+                        .Include(p=>p.Product)
+                        .FirstOrDefaultAsync();
+            return category;
+        }
+
         //Create category
         public async Task<int> Insert(Category category)
         {
+            category.IsActive = true;
             await _dbContext.Category.AddAsync(category);
             int rows = await _dbContext.SaveChangesAsync();
 
