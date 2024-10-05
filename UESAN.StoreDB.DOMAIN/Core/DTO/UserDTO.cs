@@ -55,4 +55,10 @@ namespace UESAN.StoreDB.DOMAIN.Core.DTO
         public string? Address { get; set; }
         public string? Email { get; set; }
     }
+
+    public class UserAuthDTO
+    {
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+    }
 }

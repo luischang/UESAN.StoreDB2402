@@ -22,6 +22,8 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IOrdersRepository, OrdersRepository>();
 builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddTransient<IOrdersService, OrdersService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 
 builder.Services.AddControllers();
