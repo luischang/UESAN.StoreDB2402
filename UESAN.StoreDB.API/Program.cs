@@ -3,6 +3,7 @@ using UESAN.StoreDB.DOMAIN.Core.Interfaces;
 using UESAN.StoreDB.DOMAIN.Core.Services;
 using UESAN.StoreDB.DOMAIN.Infrastructure.Data;
 using UESAN.StoreDB.DOMAIN.Infrastructure.Repositories;
+using UESAN.StoreDB.DOMAIN.Infrastructure.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,8 @@ builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddTransient<IOrdersService, OrdersService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
+
+builder.Services.AddSharedInfrastructure(_config);
 
 
 builder.Services.AddControllers();
