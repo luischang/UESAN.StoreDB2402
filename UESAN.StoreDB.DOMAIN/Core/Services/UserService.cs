@@ -55,6 +55,7 @@ namespace UESAN.StoreDB.DOMAIN.Core.Services
             user.DateOfBirth = userDTO.DateOfBirth;
             user.IsActive = true;
             user.Type = "U";
+            user.Password = userDTO.Password;
             return await _userRepository.SignUp(user);
         }
     }

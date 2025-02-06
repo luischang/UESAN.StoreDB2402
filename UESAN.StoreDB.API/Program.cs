@@ -9,10 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var _config = builder.Configuration;
-var cnx = _config.GetConnectionString("DevConnection");
-builder.Services
-    .AddDbContext<StoreDbContext>
-    (options => options.UseSqlServer(cnx));
+//var cnx = _config.GetConnectionString("DevConnection");
+//builder.Services
+//    .AddDbContext<StoreDbContext>
+//    (options => options.UseSqlServer(cnx));
+
+//MySql Connection
+var cnx = _config.GetConnectionString("DevConnectionMySql");
+builder.Services.AddDbContext<StoreDbContext>(options => options.UseMySql(cnx, ServerVersion.AutoDetect(cnx)));
+
+var mongoCnx = _config.GetConnectionString("MongoConnection");
+var mongoDB = _config["MongoDatabase"];
+builder.Services.AddDbContext<MongoDbContext>(options =>
+    options.UseMongoDB(mongoCnx, mongoDB));
 
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
